@@ -1,0 +1,19 @@
+export class Customer {
+    static idCounter = 1;
+    id : number;
+    name : string;
+    lastname : string;
+    adress : string;
+    phone : number;
+    email : string;
+
+    constructor(name:string, lastname:string, adress:string, phone:number, email:string) {
+        this.id = Customer.idCounter++;
+        this.name = name;
+        this.lastname = lastname;
+        this.adress = adress;
+        this.phone = phone;
+        this.email = email;
+    }
+
+}

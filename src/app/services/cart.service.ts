@@ -31,7 +31,9 @@ export class CartService {
     if(existingArticleInCart) {
       existingArticleInCart.quantity += training.quantity;
     } else {
-      this.listArticle?.push(training);
+      if(training.quantity > 0) {
+        this.listArticle?.push(training);
+      }
     }
     localStorage.setItem('cart', JSON.stringify(this.listArticle));
   }

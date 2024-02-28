@@ -15,9 +15,10 @@
                 <td class="border">{{training.description}}</td>
                 <td class="border">{{training.quantity}}</td>
                 <td class="border">{{training.price}}€</td>
-                <a class="btn btn-primary" (click)="removeToCart(training)">Supprimer</a>
+                <a class="btn btn-primary ml-3" (click)="removeToCart(training)">Supprimer</a>
             </tr>
-            <p>Total: {{totalPrice}}€</p>
+            <p class="fw-bold mt-3">Total: {{totalPrice}}€</p>
+            <a class="btn btn-primary ml-3">Valider Panier</a>
         </table>
     </ng-container>
 </div>
