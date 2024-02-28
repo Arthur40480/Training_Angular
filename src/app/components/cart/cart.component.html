@@ -1,0 +1,23 @@
+<div class="container">
+    <ng-container *ngIf="cartItems">
+        <h3>Votre Panier :</h3>
+        <table class="table table-striped table-hover table-bordered">
+            <tr>
+                <th class="border">ID</th>
+                <th class="border">NOM</th>
+                <th class="border">DESCRIPTION</th>
+                <th class="border">QUANTITE</th>
+                <th class="border">PRIX</th>
+            </tr>
+            <tr *ngFor="let training of cartItems">
+                <td class="border">{{training.id}}</td>
+                <td class="border">{{training.name}}</td>
+                <td class="border">{{training.description}}</td>
+                <td class="border">{{training.quantity}}</td>
+                <td class="border">{{training.price}}€</td>
+                <a class="btn btn-primary" (click)="removeToCart(training)">Supprimer</a>
+            </tr>
+            <p>Total: {{totalPrice}}€</p>
+        </table>
+    </ng-container>
+</div>
