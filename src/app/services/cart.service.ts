@@ -1,15 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Training } from '../model/training.model';
+import { Customer } from '../model/customer.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  listArticle : Training[] 
+  listArticle : Training[];
+  newCustomer : Customer;
 
   constructor() {
     this.listArticle = [];
     this.loadCartFromLocalStorage();
+    this.newCustomer = new Customer('', '', '', '', '');
+  }
+
+  /**
+   * Renvoi le client
+   * @returns newCustomer le client à renvoyer
+   */
+  getCustomer() {
+    return this.newCustomer;
   }
 
   /**

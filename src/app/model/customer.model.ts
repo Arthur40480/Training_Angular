@@ -4,10 +4,10 @@ export class Customer {
     name : string;
     lastname : string;
     adress : string;
-    phone : number;
+    phone : string;
     email : string;
 
-    constructor(name:string, lastname:string, adress:string, phone:number, email:string) {
+    constructor(name:string, lastname:string, adress:string, phone:string, email:string) {
         this.id = Customer.idCounter++;
         this.name = name;
         this.lastname = lastname;

@@ -1,22 +1,24 @@
 <div class="container">
-    <ng-container *ngIf="cartItems">
+    <ng-container *ngIf="cartService.listArticle">
         <h3>Votre Panier :</h3>
-        <table class="table table-striped table-hover table-bordered">
-            <tr>
-                <th class="border">ID</th>
-                <th class="border">NOM</th>
-                <th class="border">DESCRIPTION</th>
-                <th class="border">QUANTITE</th>
-                <th class="border">PRIX</th>
-            </tr>
-            <tr *ngFor="let training of cartItems">
-                <td class="border">{{training.id}}</td>
-                <td class="border">{{training.name}}</td>
-                <td class="border">{{training.description}}</td>
-                <td class="border">{{training.quantity}}</td>
-                <td class="border">{{training.price}}€</td>
-                <a class="btn btn-primary ml-3" (click)="removeToCart(training)">Supprimer</a>
-            </tr>
+        <table class="table table-striped table-hover">
+            <thead>
+                <th>ID</th>
+                <th>NOM</th>
+                <th>DESCRIPTION</th>
+                <th>QUANTITE</th>
+                <th>PRIX</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let training of cartService.listArticle">
+                    <td>{{training.id}}</td>
+                    <td>{{training.name}}</td>
+                    <td>{{training.description}}</td>
+                    <td>{{training.quantity}}</td>
+                    <td>{{training.price}}€</td>
+                    <td><a class="btn btn-primary" (click)="removeToCart(training)">Supprimer</a></td>               
+                </tr>
+            </tbody>
             <p class="fw-bold mt-3">Total: {{totalPrice}}€</p>
             <a class="btn btn-primary ml-3" routerLink="/customer">Valider Panier</a>
         </table>

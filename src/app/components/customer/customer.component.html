@@ -1,29 +1,29 @@
 <div class="container">
     <div class="col-md-3">
-        <form #f="ngForm">
+        <form #f="ngForm" (ngSubmit)="onSaveCustomer(f.value)">
         <div class="form-group">
             <label class="control-label">Nom : </label>
-            <input type="text" name="name" required class="form-control">
+            <input type="text" name="name" required class="form-control" [(ngModel)]="cartService.getCustomer().name">
         </div>
         <div class="form-group">
             <label class="control-label">Prénom : </label>
-            <input type="text" name="firstName" required class="form-control">
+            <input type="text" name="firstName" required class="form-control" [(ngModel)]="cartService.getCustomer().lastname">
         </div>
         <div class="form-group">
             <label class="control-label">Adress : </label>
-            <input type="text" name="address" required class="form-control">
+            <input type="text" name="address" required class="form-control" [(ngModel)]="cartService.getCustomer().adress">
 
             <div class="form-group">
                 <label class="control-label">Tel : </label>
-                <input type="text" name="phone" required class="form-control">
+                <input type="text" name="phone" required class="form-control" [(ngModel)]="cartService.getCustomer().phone">
             </div>
 
             <div class="form-group">
                 <label class="control-label">Email : </label>
-                <input type="text" name="email" required class="form-control">
+                <input type="text" name="email" required class="form-control" [(ngModel)]="cartService.getCustomer().email">
             </div>
 
-            <button type="submit" class="btn btn-primary">Next</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Next</button>
         </div>
         </form>
     </div>
