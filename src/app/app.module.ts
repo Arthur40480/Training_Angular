@@ -7,13 +7,15 @@ import { TrainingsComponent } from './components/trainings/trainings.component';
 import { FormsModule } from '@angular/forms';
 import { CartComponent } from './components/cart/cart.component';
 import { CustomerComponent } from './components/customer/customer.component';
+import { OrderComponent } from './components/order/order.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TrainingsComponent,
     CartComponent,
-    CustomerComponent
+    CustomerComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,

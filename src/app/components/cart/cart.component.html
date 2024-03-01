@@ -16,10 +16,10 @@
                     <td>{{training.description}}</td>
                     <td>{{training.quantity}}</td>
                     <td>{{training.price}}€</td>
-                    <td><a class="btn btn-primary" (click)="removeToCart(training)">Supprimer</a></td>               
+                    <td><a class="btn btn-danger" (click)="removeToCart(training)">Supprimer</a></td>               
                 </tr>
             </tbody>
-            <p class="fw-bold mt-3">Total: {{totalPrice}}€</p>
+            <p class="fw-bold mt-3">Total: {{cartService.totalPrice}}€</p>
             <a class="btn btn-primary ml-3" routerLink="/customer">Valider Panier</a>
         </table>
     </ng-container>

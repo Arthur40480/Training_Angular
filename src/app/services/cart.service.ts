@@ -7,30 +7,36 @@ import { Customer } from '../model/customer.model';
 })
 export class CartService {
   listArticle : Training[];
+  totalPrice : number;
   newCustomer : Customer;
 
   constructor() {
     this.listArticle = [];
-    this.loadCartFromLocalStorage();
+    this.totalPrice = 0;
     this.newCustomer = new Customer('', '', '', '', '');
+    this.loadDataFromLocalStorage();
   }
 
   /**
-   * Renvoi le client
-   * @returns newCustomer le client à renvoyer
+   * Enregistre le client dans le LocalStorage
    */
-  getCustomer() {
-    return this.newCustomer;
+  saveCustomerInLocalStorage(customer : Customer) {
+    localStorage.setItem('customer', JSON.stringify(customer));
   }
 
   /**
-   * Récupération des données du panier via le LocalStorage
+   * Récupération des données du panier/client via le LocalStorage
    */
-  loadCartFromLocalStorage() {
+  loadDataFromLocalStorage() {
     const cartData = localStorage.getItem('cart');
+    const customerData = localStorage.getItem('customer');
     if(cartData) {
       this.listArticle = JSON.parse(cartData);
     };
+    if(customerData) {
+      this.newCustomer = JSON.parse(customerData);
+    }
+    this.getTotalPrice();
   };
 
   /**
@@ -47,6 +53,7 @@ export class CartService {
       }
     }
     localStorage.setItem('cart', JSON.stringify(this.listArticle));
+    this.getTotalPrice();
   }
 
   /**
@@ -59,22 +66,30 @@ export class CartService {
       this.listArticle?.splice(indexArticleToDelete, 1);
     }
     localStorage.setItem('cart', JSON.stringify(this.listArticle));
+    this.getTotalPrice();
   }
 
-    /**
+  /**
    * Calcule le coût total du panier
-   * @returns total => Coût total du panier
    */
   getTotalPrice() {
-    let total = 0;
+    this.totalPrice = 0;
     if(this.listArticle.length > 0) {
       for(let article of this.listArticle) {
-        total += article.price * article.quantity;
+        this.totalPrice += article.price * article.quantity;
       }
-      return total;
     }else {
-      return total;
+      this.totalPrice = 0;
     }
   }
 
+  /**
+   * Vide le localStorage ainsi que le panier
+   */
+  validateOrder() {
+    this.listArticle = [];
+    localStorage.removeItem('cart');
+    localStorage.removeItem('customer');
+    this.getTotalPrice();
+  }
 }

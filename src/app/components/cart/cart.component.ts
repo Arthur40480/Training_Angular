@@ -8,12 +8,10 @@ import { CartService } from 'src/app/services/cart.service';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-  totalPrice : Number = 0;
 
   constructor(public cartService : CartService) { }
 
   ngOnInit(): void {
-    this.totalPrice = this.cartService.getTotalPrice();
   }
   
   /**
@@ -22,7 +20,6 @@ export class CartComponent implements OnInit {
    */
   removeToCart(training : Training) {
     this.cartService.removeTraining(training);
-    this.totalPrice = this.cartService.getTotalPrice();
   }
 
 }
