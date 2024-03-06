@@ -18,7 +18,7 @@ const routes: Routes = [
     path: 'admin', component : AdminComponent,
     canActivate: [AdminGuard]
   },
-  { path : '', redirectTo : 'login', pathMatch : 'full' }
+  { path : '', redirectTo : 'trainings', pathMatch : 'full' }
 ];
 
 @NgModule({

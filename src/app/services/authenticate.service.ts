@@ -31,13 +31,15 @@ export class AuthenticateService {
    * On vérifie si l'utilisateur existe 
    * @param userToCheck : User
    */
-  ifUserExist(userToCheck: User) {
+  ifUserExist(userToCheck: User) : boolean {
     const existingUser = this.listUser.find(user => user.password === userToCheck.password && user.email === userToCheck.email)
     if(existingUser) {
       this.saveUserInLocalStorage(existingUser);
-      this.connectedUser = this.getUserfromLocalStorage();
+      this.connectedUser = this.getUserfromLocalStorage()
+      return true;
     }else {
       console.log("L'utilisateur n'existe pas !");
+      return false;
     }
   }
 
