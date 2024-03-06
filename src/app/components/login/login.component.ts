@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticateService } from 'src/app/services/authenticate.service';
+import { User } from 'src/app/model/user.model';
 
 @Component({
   selector: 'app-login',
@@ -24,6 +25,6 @@ export class LoginComponent implements OnInit {
    * Fonction qui vérifie si l'utilisateur existe
    */
   connectUser() {
-    console.log(this.myForm.value);
+    this.authService.ifUserExist(new User(this.myForm.value.email, this.myForm.value.password))
   }
 }

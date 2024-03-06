@@ -4,8 +4,8 @@ export class User {
     email : string;
     password : string;
 
-    constructor(id:number, email:string, password:string) {
-        this.id = id;
+    constructor(email:string, password:string) {
+        this.id = User.idCounter++;
         this.email = email;
         this.password = password;
     }

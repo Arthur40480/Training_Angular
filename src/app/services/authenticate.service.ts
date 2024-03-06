@@ -24,6 +24,19 @@ export class AuthenticateService {
     })
   }
 
+  /**
+   * On vérifie si l'utilisateur existe 
+   * @param user 
+   */
+  ifUserExist(userToCheck: User) {
+    const existingUser = this.listUser.find(user => user.password === userToCheck.password && user.email === userToCheck.email)
+    if(existingUser) {
+      console.log("L'utilisateur est connecté")
+    }else {
+      console.log("L'utilisateur n'existe pas !")
+    }
+  }
+
   isAdmin() {
     return true;
   }

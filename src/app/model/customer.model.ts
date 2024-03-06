@@ -1,5 +1,5 @@
 export class Customer {
-    static idCounter = 1;
+    static idCounter = 3;
     id : number;
     name : string;
     lastname : string;
