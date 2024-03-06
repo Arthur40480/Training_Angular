@@ -2,6 +2,7 @@ import { Component, OnInit, SimpleChange } from '@angular/core';
 import { Customer } from 'src/app/model/customer.model';
 import { CartService } from 'src/app/services/cart.service';
 import { Router } from '@angular/router';
+import { FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-customer',
@@ -9,8 +10,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./customer.component.css']
 })
 export class CustomerComponent implements OnInit {
+  myForm : FormGroup;
 
-  constructor(public cartService : CartService, private router : Router) { }
+  constructor(public cartService : CartService, private router : Router) {
+    let customer = this.cartService.getCustomerFromLocalStorage();
+    this.myForm = new FormGroup({
+      name : new FormControl(customer.name),
+      firstName: new FormControl(customer.firstName),
+      address : new FormControl(customer.address),
+      phone : new FormControl(customer.phone),
+      email : new FormControl(customer.email)
+    })
+  }
 
   ngOnInit(): void {
   }
@@ -19,8 +30,8 @@ export class CustomerComponent implements OnInit {
    * Appelle la méthode du cartService pour enregistrer le client au localStorage
    * @param customer client à enregistrer dans le localstorage
    */
-  onSaveCustomer(customer : Customer) {
-    this.cartService.saveCustomerInLocalStorage(customer);
-    this.router.navigate(['/order']);
+  onSaveCustomer(form : FormGroup) {
+    this.cartService.saveCustomerInLocalStorage(new Customer(form.value.name, form.value.firstName, form.value.address, form.value.phone, form.value.email));
+    this.router.navigateByUrl('order');
   }
 }

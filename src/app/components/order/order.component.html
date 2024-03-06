@@ -8,7 +8,7 @@
             <th>PRIX</th>
         </thead>
         <tbody>
-            <tr *ngFor="let training of cartService.listArticle">
+            <tr *ngFor="let training of cartService.cart">
                 <td>{{training.id}}</td>
                 <td>{{training.name}}</td>
                 <td>{{training.quantity}}</td>
@@ -18,7 +18,7 @@
         <p class="fw-bold mt-3">Total: {{cartService.totalPrice}}€</p>
     </table>
     <div>
-        <a class="btn btn-primary" routerLink="/trainings" (click)="cartService.validateOrder()">Valider commande</a>
+        <a class="btn btn-primary" routerLink="/trainings" (click)="cartService.clearCart()">Valider commande</a>
         <a class="btn btn-danger m-2" routerLink="/trainings">Annuler commande</a>
     </div>
 </div>

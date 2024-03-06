@@ -5,6 +5,9 @@
       <a class="nav-link" routerLink="/trainings">Formations</a>
       <a class="nav-link" routerLink="/cart">Panier</a>
     </li>
+    <li *ngIf="this.verifyIsAdmin()" class="nav-item">
+      <a class="nav-link" href=# routerLink="/admin">Administration</a>
+    </li>
   </ul>
 </nav>
 <router-outlet></router-outlet>

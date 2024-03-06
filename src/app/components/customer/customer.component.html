@@ -1,6 +1,6 @@
 <div class="container">
     <div class="col-md-3">
-        <form #f="ngForm" (ngSubmit)="onSaveCustomer(f.value)">
+        <form [formGroup]="myForm" (ngSubmit)="onSaveCustomer(myForm)">
         <div class="form-group">
             <label class="control-label">Nom : </label>
             <input type="text" name="name" required class="form-control" [(ngModel)]="cartService.newCustomer.name">
@@ -23,7 +23,7 @@
                 <input type="text" name="email" required class="form-control" [(ngModel)]="cartService.newCustomer.email">
             </div>
 
-            <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Next</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!myForm.valid">Next</button>
         </div>
         </form>
     </div>

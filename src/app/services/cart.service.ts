@@ -6,15 +6,19 @@ import { Customer } from '../model/customer.model';
   providedIn: 'root'
 })
 export class CartService {
-  listArticle : Training[];
+  cart : Training[];
   totalPrice : number;
   newCustomer : Customer;
 
   constructor() {
-    this.listArticle = [];
     this.totalPrice = 0;
     this.newCustomer = new Customer('', '', '', '', '');
-    this.loadDataFromLocalStorage();
+    let cart = localStorage.getItem("cart");
+    if(cart) {
+      this.cart = JSON.parse(cart);
+    }else {
+      this.cart = [];
+    }
   }
 
   /**
@@ -25,34 +29,32 @@ export class CartService {
   }
 
   /**
-   * Récupération des données du panier/client via le LocalStorage
+   * Renvoi le client à partir du LocalStorage si il existe, sinon renvoi une instance de la classe Customer
+   * @returns customer
    */
-  loadDataFromLocalStorage() {
-    const cartData = localStorage.getItem('cart');
-    const customerData = localStorage.getItem('customer');
-    if(cartData) {
-      this.listArticle = JSON.parse(cartData);
-    };
-    if(customerData) {
-      this.newCustomer = JSON.parse(customerData);
+  getCustomerFromLocalStorage() {
+    let customer = localStorage.getItem("customer");
+    if(customer) {
+      return JSON.parse(customer);
+    }else {
+      return new Customer("Unknow", "", "", "", "");
     }
-    this.getTotalPrice();
-  };
+  }
 
   /**
    * Ajout d'une formation au panier
    * @param training Formation ajoutée
    */
   addTraining(training: Training) {
-    const existingArticleInCart = this.listArticle?.find(article => article.id == training.id);
+    const existingArticleInCart = this.cart?.find(article => article.id == training.id);
     if(existingArticleInCart) {
       existingArticleInCart.quantity += training.quantity;
     } else {
       if(training.quantity > 0) {
-        this.listArticle?.push(training);
+        this.cart?.push(training);
       }
     }
-    localStorage.setItem('cart', JSON.stringify(this.listArticle));
+    localStorage.setItem('cart', JSON.stringify(this.cart));
     this.getTotalPrice();
   }
 
@@ -61,11 +63,11 @@ export class CartService {
    * @param training Formation supprimée
    */
   removeTraining(training: Training) {
-    const indexArticleToDelete = this.listArticle?.indexOf(training);
+    const indexArticleToDelete = this.cart?.indexOf(training);
     if(indexArticleToDelete !== -1) {
-      this.listArticle?.splice(indexArticleToDelete, 1);
+      this.cart?.splice(indexArticleToDelete, 1);
     }
-    localStorage.setItem('cart', JSON.stringify(this.listArticle));
+    localStorage.setItem('cart', JSON.stringify(this.cart));
     this.getTotalPrice();
   }
 
@@ -74,8 +76,8 @@ export class CartService {
    */
   getTotalPrice() {
     this.totalPrice = 0;
-    if(this.listArticle.length > 0) {
-      for(let article of this.listArticle) {
+    if(this.cart.length > 0) {
+      for(let article of this.cart) {
         this.totalPrice += article.price * article.quantity;
       }
     }else {
@@ -84,12 +86,19 @@ export class CartService {
   }
 
   /**
-   * Vide le localStorage ainsi que le panier
+   * Vide le panier
    */
-  validateOrder() {
-    this.listArticle = [];
+  clearCart() {
+    this.cart = [];
+    this.clearLocalStorage();
+    this.getTotalPrice();
+  }
+
+  /**
+   * Vide le localStorage
+   */
+  clearLocalStorage() {
     localStorage.removeItem('cart');
     localStorage.removeItem('customer');
-    this.getTotalPrice();
   }
 }

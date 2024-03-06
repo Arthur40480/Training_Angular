@@ -1,5 +1,5 @@
 <div class="container">
-    <ng-container *ngIf="cartService.listArticle.length > 0">
+    <ng-container *ngIf="cartService.cart.length > 0">
         <h3>Votre Panier :</h3>
         <table class="table table-striped table-hover">
             <thead>
@@ -10,7 +10,7 @@
                 <th>PRIX</th>
             </thead>
             <tbody>
-                <tr *ngFor="let training of cartService.listArticle">
+                <tr *ngFor="let training of cartService.cart">
                     <td>{{training.id}}</td>
                     <td>{{training.name}}</td>
                     <td>{{training.description}}</td>
