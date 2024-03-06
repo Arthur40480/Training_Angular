@@ -34,41 +34,51 @@ export class AuthenticateService {
   ifUserExist(userToCheck: User) {
     const existingUser = this.listUser.find(user => user.password === userToCheck.password && user.email === userToCheck.email)
     if(existingUser) {
-      console.log("L'utilisateur est connecté")
-      console.log(this.listUser)
       this.saveUserInLocalStorage(existingUser);
       this.connectedUser = this.getUserfromLocalStorage();
     }else {
-      console.log("L'utilisateur n'existe pas !")
+      console.log("L'utilisateur n'existe pas !");
     }
   }
 
   /**
-   * Enregistre le client dans le LocalStorage tout en cryptant ces données
-   */
-    saveUserInLocalStorage(user : User) {
-      const userCopy = { ...user};
-      userCopy.password = this.encryptService.encrypt(user.password);
-      userCopy.email = this.encryptService.encrypt(user.email);
-      localStorage.setItem('user', JSON.stringify(userCopy));
-    }
+  * Enregistre l'utilisateur dans le LocalStorage tout en cryptant ces données
+  */
+  saveUserInLocalStorage(user : User) {
+    const userCopy = { ...user};
+    userCopy.password = this.encryptService.encrypt(user.password);
+    userCopy.email = this.encryptService.encrypt(user.email);
+    localStorage.setItem('user', JSON.stringify(userCopy));
+  }
     
   /**
-   * Récupère le client depuis le LocalStorage tout en décryptant ces données
-   */
-    getUserfromLocalStorage() : User | null {
-      const encryptUserData = localStorage.getItem('user');
-      if(encryptUserData) {
-        const user = JSON.parse(encryptUserData);
-        user.password = this.encryptService.decrypt(user.password);
-        user.email = this.encryptService.decrypt(user.email);
-        return user;
+  * Récupère l'utilisateur depuis le LocalStorage tout en décryptant ces données
+  */
+  getUserfromLocalStorage() : User | null {
+    const encryptUserData = localStorage.getItem('user');
+    if(encryptUserData) {
+      const user = JSON.parse(encryptUserData);
+      user.password = this.encryptService.decrypt(user.password);
+      user.email = this.encryptService.decrypt(user.email);
+      return user;
 
-      }else {
-        return null;
-      }
+    }else {
+      return null;
     }
+  }
 
+  /**
+   * Supprime l'utilisateur du localStorage
+   */
+  removeUserFromLocalStorage() {
+    localStorage.removeItem('user');
+    this.connectedUser == null;
+  }
+
+  /**
+   * On vérifie si l'utilisateur connecté est un ADMIN
+   * @returns boolean
+   */
   isAdmin() : boolean {
     this.connectedUser = this.getUserfromLocalStorage();
     if(this.connectedUser) {

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthenticateService } from './services/authenticate.service';
+import { User } from './model/user.model';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,15 @@ export class AppComponent {
 
   constructor(private authService : AuthenticateService) {}
 
-  verifyIsAdmin() {
+  verifyIsAdmin() : boolean {
     return this.authService.isAdmin();
+  }
+
+  verifyIfUserConnected() : User | null {
+    return this.authService.connectedUser;
+  }
+
+  logout() {
+    this.authService.removeUserFromLocalStorage();
   }
 }
