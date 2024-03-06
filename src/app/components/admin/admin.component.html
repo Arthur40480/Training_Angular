@@ -1,1 +1,29 @@
-<p>admin works!</p>
+<div class="container">
+    <ng-container *ngIf="listTrainings else loading">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>NOM</th>
+                    <th>DESCRIPTION</th>
+                    <th>PRIX</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let training of listTrainings">
+                    <td>{{training.id}}</td>
+                    <td>{{training.name}}</td>
+                    <td>{{training.description}}</td>
+                    <td>{{training.price | number:'0.2'}}€</td>
+                    <td><a class="btn btn-success">Mis à jour</a></td>
+                    <td><a class="btn btn-danger">Supprimer</a></td>
+                </tr>
+                <a class="btn btn-primary">Ajouter une formation</a>
+            </tbody>
+        </table>
+
+    </ng-container>
+    <ng-template #loading>
+        <div>loading...</div>
+    </ng-template>
+</div>
