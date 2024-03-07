@@ -19,7 +19,9 @@ const routes: Routes = [
     path: 'admin', component : AdminComponent,
     canActivate: [AdminGuard]
   },
-  { path: 'admin-data-form', component : AdminDataFormComponent},
+  { path: 'admin-data-form', component : AdminDataFormComponent,
+    canActivate: [AdminGuard]
+  },
   { path: 'admin-data-form/:id', component: AdminDataFormComponent},
   { path : '', redirectTo : 'trainings', pathMatch : 'full' }
 ];
