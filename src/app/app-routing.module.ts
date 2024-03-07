@@ -10,18 +10,17 @@ import { LoginComponent } from './components/login/login.component';
 import { AdminDataFormComponent } from './components/admin-data-form/admin-data-form.component';
 
 const routes: Routes = [
-  { path : 'trainings', component : TrainingsComponent },
-  { path : 'cart', component : CartComponent },
-  { path : 'customer', component : CustomerComponent },
+  { path : 'trainings', component : TrainingsComponent},
+  { path : 'cart', component : CartComponent},
+  { path : 'customer', component : CustomerComponent},
   { path : 'order', component : OrderComponent},
   { path : 'login', component : LoginComponent},
   {
     path: 'admin', component : AdminComponent,
     canActivate: [AdminGuard]
   },
-  {
-    path: 'admin-data-form', component : AdminDataFormComponent
-  },
+  { path: 'admin-data-form', component : AdminDataFormComponent},
+  { path: 'admin-data-form/:id', component: AdminDataFormComponent},
   { path : '', redirectTo : 'trainings', pathMatch : 'full' }
 ];
 

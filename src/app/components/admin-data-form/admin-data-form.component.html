@@ -13,10 +13,7 @@
             <label class="control-label">Price :</label>
             <input type="text" formControlName="price" required class="form-control">
         </div>
-        <!-- <div>
-            <p *ngIf="isLoginFailed" class="text-danger">Email or password incorrect.</p>
-        </div> -->
-            <button type="submit" class="btn btn-primary mt-2 " [disabled]="!myForm.valid" (click)="createTraining()">Validate</button>
+            <button type="submit" class="btn btn-primary mt-2 " [disabled]="!myForm.valid" (click)="createOrUpdate()">Validate</button>
         </form>
     </div>
 </div>
