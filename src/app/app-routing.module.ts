@@ -7,6 +7,7 @@ import { OrderComponent } from './components/order/order.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { AdminGuard } from './components/admin.guard';
 import { LoginComponent } from './components/login/login.component';
+import { AdminDataFormComponent } from './components/admin-data-form/admin-data-form.component';
 
 const routes: Routes = [
   { path : 'trainings', component : TrainingsComponent },
@@ -17,6 +18,9 @@ const routes: Routes = [
   {
     path: 'admin', component : AdminComponent,
     canActivate: [AdminGuard]
+  },
+  {
+    path: 'admin-data-form', component : AdminDataFormComponent
   },
   { path : '', redirectTo : 'trainings', pathMatch : 'full' }
 ];

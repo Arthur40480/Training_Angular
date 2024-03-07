@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AdminComponent } from './components/admin/admin.component';
 import { LoginComponent } from './components/login/login.component';
+import { AdminDataFormComponent } from './components/admin-data-form/admin-data-form.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { LoginComponent } from './components/login/login.component';
     CustomerComponent,
     OrderComponent,
     AdminComponent,
-    LoginComponent
+    LoginComponent,
+    AdminDataFormComponent
   ],
   imports: [
     BrowserModule,

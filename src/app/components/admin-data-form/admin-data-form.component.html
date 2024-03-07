@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="col-md-3">
+        <form [formGroup]="myForm">
+        <div class="form-group">
+            <label class="control-label">Name : </label>
+            <input type="text" formControlName="name" required class="form-control">
+        </div>
+        <div class="form-group">
+            <label class="control-label">Description :</label>
+            <input type="text" formControlName="description" required class="form-control">
+        </div>
+        <div class="form-group">
+            <label class="control-label">Price :</label>
+            <input type="text" formControlName="price" required class="form-control">
+        </div>
+        <!-- <div>
+            <p *ngIf="isLoginFailed" class="text-danger">Email or password incorrect.</p>
+        </div> -->
+            <button type="submit" class="btn btn-primary mt-2 " [disabled]="!myForm.valid">Validate</button>
+        </form>
+    </div>
+</div>
