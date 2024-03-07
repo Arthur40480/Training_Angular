@@ -41,21 +41,32 @@
       "description": "Formation Java Avancé/Bdd 3 jours",
       "price": 1200,
       "quantity": 1
+    },
+    {
+      "name": "Football",
+      "description": "Formation pour devenir messi en 2j",
+      "price": "10000",
+      "quantity": 1,
+      "id": 8
     }
   ],
-
   "users": [
     {
       "id": 1,
       "email": "elbab@gmail.com",
       "password": "1234",
-      "roles": ["ADMIN", "USER"]
+      "roles": [
+        "ADMIN",
+        "USER"
+      ]
     },
     {
       "id": 2,
       "email": "arthur@gmail.com",
       "password": "1234",
-      "roles": ["USER"]
+      "roles": [
+        "USER"
+      ]
     }
   ]
 }

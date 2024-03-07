@@ -22,4 +22,16 @@ export class ApiService {
   public getUsers() {
     return this.http.get<User[]>(environment.host + "/users")
   }
+
+  public addTraining(training: Training) {
+    console.log("envoyer")
+    this.http.post<Training>(environment.host + "/trainings", training).subscribe(
+      response => {
+        console.log("Formation ajoutée avec succès :", response);
+      },
+      error => {
+        console.error("Une erreur s'est produite lors de l'ajout de la formation :", error);
+      }
+    );
+  }
 }
