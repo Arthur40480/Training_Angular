@@ -34,20 +34,6 @@
       "description": "Prise en main de NodeJS/Express 2 jours",
       "price": 1400,
       "quantity": 1
-    },
-    {
-      "id": 7,
-      "name": "Java Avancé",
-      "description": "Formation Java Avancé/Bdd 3 jours",
-      "price": 1200,
-      "quantity": 1
-    },
-    {
-      "name": "Football",
-      "description": "Formation pour devenir messi en 2j",
-      "price": "10000",
-      "quantity": 1,
-      "id": 8
     }
   ],
   "users": [

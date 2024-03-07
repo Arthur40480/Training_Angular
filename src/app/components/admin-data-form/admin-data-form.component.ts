@@ -28,4 +28,5 @@ export class AdminDataFormComponent implements OnInit {
   createTraining() {
     this.apiService.addTraining(new Training(this.myForm.value.name, this.myForm.value.description, this.myForm.value.price));
   }
+  
 }

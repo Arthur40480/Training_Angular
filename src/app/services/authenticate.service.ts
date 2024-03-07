@@ -38,7 +38,6 @@ export class AuthenticateService {
       this.connectedUser = this.getUserfromLocalStorage()
       return true;
     }else {
-      console.log("L'utilisateur n'existe pas !");
       return false;
     }
   }
@@ -86,14 +85,11 @@ export class AuthenticateService {
     if(this.connectedUser) {
       const isAdmin= this.connectedUser.roles.includes("ADMIN");
       if(isAdmin) {
-        console.log("C'est un ADMIN");
         return true;
       }else{
-        console.log("Ce n'est pas un ADMIN");
         return false;
       }
     }
-    console.log("Aucun utilisateur connecté");
     return false;
   }
 }

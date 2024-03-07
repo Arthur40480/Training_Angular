@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Training } from '../model/training.model';
 import { User } from '../model/user.model';
 import { environment } from 'src/environments/environment';
+import { env } from 'process';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,6 @@ export class ApiService {
   }
 
   public addTraining(training: Training) {
-    console.log("envoyer")
     this.http.post<Training>(environment.host + "/trainings", training).subscribe(
       response => {
         console.log("Formation ajoutée avec succès :", response);
@@ -33,5 +33,9 @@ export class ApiService {
         console.error("Une erreur s'est produite lors de l'ajout de la formation :", error);
       }
     );
+  }
+
+  public deleteTraining(id : number) {
+    return this.http.delete(environment.host + "/trainings/" + id);
   }
 }

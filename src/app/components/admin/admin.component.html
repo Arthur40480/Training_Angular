@@ -16,7 +16,7 @@
                     <td>{{training.description}}</td>
                     <td>{{training.price | number:'0.2'}}€</td>
                     <td><a class="btn btn-success">Mis à jour</a></td>
-                    <td><a class="btn btn-danger">Supprimer</a></td>
+                    <td><a class="btn btn-danger" (click)="deleteTraining(training)">Supprimer</a></td>
                 </tr>
                 <a class="btn btn-primary" routerLink="/admin-data-form">Ajouter une formation</a>
             </tbody>

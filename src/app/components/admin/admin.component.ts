@@ -18,6 +18,9 @@ export class AdminComponent implements OnInit {
     this.getAllTrainings();
   }
 
+  /**
+   * Fonction pour récupérer les formations depuis la bdd
+   */
   getAllTrainings() {
     this.apiService.getTrainings().subscribe({
       next : (data) => this.listTrainings = data,
@@ -25,4 +28,21 @@ export class AdminComponent implements OnInit {
       complete : () => this.error = null
     })
   }
+
+    /**
+   * Fonction pour supprimer une formation
+   */
+    deleteTraining(training: Training) {
+      if(training.id !== undefined) {
+        this.apiService.deleteTraining(training.id).subscribe({
+          next: response => {
+            console.log("Formation supprimée avec succès :", response);
+            this.getAllTrainings();
+          },
+          error: error => {
+            console.error("Une erreur s'est produite lors de la suppression de la formation :", error);
+          }
+        });
+      }
+    }
 }
