@@ -15,14 +15,14 @@
                     <td>{{training.name}}</td>
                     <td>{{training.description}}</td>
                     <td>{{training.price | number:'0.2'}}€</td>
-                    <td><a class="btn btn-success" [routerLink]="['/admin-data-form', training.id]">Mis à jour</a></td>
+                    <td><a class="btn btn-success" (click)="navigateToUpdateForm(training.id)">Mis à jour</a></td>
                     <td><a class="btn btn-danger" (click)="deleteTraining(training)">Supprimer</a></td>
                 </tr>
-                <a class="btn btn-primary" routerLink="/admin-data-form">Ajouter une formation</a>
+                <a class="btn btn-primary" (click)="navigateToCreateForm()">Ajouter une formation</a>
             </tbody>
         </table>
         <div *ngIf="this.displayErrorMsg()">
-            <p class="dt text-danger">{{this.displayErrorMsg()}}</p>
+            <p class="dt text-danger">{{displayErrorMsg()}}</p>
         </div>
     </ng-container>
     <ng-template #loading>

@@ -27,6 +27,13 @@
       "description": "Initiation au Dev/Web avec php 4 jours",
       "price": 1300,
       "quantity": 1
+    },
+    {
+      "name": "EGREGERGERG",
+      "description": "ERZZZZZZZZZ",
+      "price": "11",
+      "quantity": 1,
+      "id": 5
     }
   ],
   "users": [
