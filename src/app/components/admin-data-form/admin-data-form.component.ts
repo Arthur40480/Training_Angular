@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Training } from 'src/app/model/training.model';
 import { ApiService } from 'src/app/services/api.service';
 import { Router } from '@angular/router';
-import { FormStateService } from 'src/app/services/form-state.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-admin-data-form',
@@ -12,13 +12,15 @@ import { FormStateService } from 'src/app/services/form-state.service';
 })
 export class AdminDataFormComponent implements OnInit {
   myForm: FormGroup;
+  idTraining : number | undefined;
 
-  constructor(private formBuilder : FormBuilder, private apiService : ApiService, private router : Router, private formStateService : FormStateService) {
+  constructor(private formBuilder : FormBuilder, private apiService : ApiService, private router : Router, private route : ActivatedRoute) {
     this.myForm = this.formBuilder.group({
       name : ['', [Validators.required, Validators.maxLength(30)]],
       description : ['', [Validators.required, Validators.maxLength(50)]],
       price : ['', [Validators.required, Validators.pattern('^[0-9]+$')]]
     });
+    this.idTraining = this.route.snapshot.params['id'];
    }
 
   ngOnInit(): void {
@@ -28,10 +30,10 @@ export class AdminDataFormComponent implements OnInit {
    * Fonction permettant d'apeller soit la méthode pour créer/mettre a jour suivant les params de l'URL
    */
   createOrUpdate() : void {
-    if(this.formStateService.getCreate()) {
-      this.createTraining();
+    if(this.idTraining) {
+      this.updateTraining(this.idTraining);
     }else {
-      this.updateTraining(this.formStateService.getidTraining());
+      this.createTraining();
     }
   }
    

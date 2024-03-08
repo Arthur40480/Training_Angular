@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Training } from 'src/app/model/training.model';
 import { ApiService } from 'src/app/services/api.service';
 import { ErrorServiceService } from 'src/app/services/error-service.service';
-import { FormStateService } from 'src/app/services/form-state.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -14,7 +14,7 @@ export class AdminComponent implements OnInit {
   listTrainings : Training[] | undefined;
   error : string | undefined | null;
 
-  constructor(private apiService : ApiService, private errorService : ErrorServiceService, private formStateService : FormStateService, private router : Router) { }
+  constructor(private apiService : ApiService, private errorService : ErrorServiceService, private router : Router) { }
 
   ngOnInit(): void {
     this.getAllTrainings();
@@ -53,14 +53,11 @@ export class AdminComponent implements OnInit {
     };
 
     navigateToCreateForm() : void {
-      this.formStateService.create(true);
       this.router.navigateByUrl('admin-data-form');  
     }
 
     navigateToUpdateForm(id : number | undefined) : void {
-      this.formStateService.create(false);
-      this.formStateService.idTrainingToUpdate(id);
-      this.router.navigateByUrl('admin-data-form');  
+      this.router.navigateByUrl('admin-data-form/' + id);  
     }
 
     /**
