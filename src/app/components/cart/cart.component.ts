@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Training } from 'src/app/model/training.model';
+import { AuthenticateService } from 'src/app/services/authenticate.service';
 import { CartService } from 'src/app/services/cart.service';
+import { User } from 'src/app/model/user.model';
 
 @Component({
   selector: 'app-cart',
@@ -9,7 +12,7 @@ import { CartService } from 'src/app/services/cart.service';
 })
 export class CartComponent implements OnInit {
 
-  constructor(public cartService : CartService) { }
+  constructor(public cartService : CartService, private router : Router, private authService : AuthenticateService) { }
 
   ngOnInit(): void {
   }
@@ -22,4 +25,16 @@ export class CartComponent implements OnInit {
     this.cartService.removeTraining(training);
   }
 
+  /**
+   * Méthode qui permet de vérifier si un utilisateur est connecté
+   * @returns User | null
+   */
+    verifyIfUserConnected() : void {
+      const userConnected = this.authService.connectedUser;
+      if(userConnected) {
+        this.router.navigateByUrl('customer');
+      } else {
+        this.router.navigateByUrl('login');
+      }
+    }
 }

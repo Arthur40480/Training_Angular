@@ -19,6 +19,7 @@ export class CartService {
     }else {
       this.cart = [];
     }
+    this.getTotalPrice();
   }
 
   /**
