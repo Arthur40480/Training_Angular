@@ -3,6 +3,7 @@ import { Training } from 'src/app/model/training.model';
 import { CartService } from 'src/app/services/cart.service';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
+import { ErrorServiceService } from 'src/app/services/error-service.service';
 
 
 @Component({
@@ -14,18 +15,23 @@ export class TrainingsComponent implements OnInit {
   listTrainings : Training[] | undefined;
   error : string | undefined | null;
   
-  constructor(private cartService : CartService, private router : Router, private apiService : ApiService) { 
+  constructor(private cartService : CartService, private router : Router, private apiService : ApiService, private errorService : ErrorServiceService) { 
   }
 
   ngOnInit(): void {
     this.getAllTrainings();
   }
-
+  
+  /**
+   * Fonction pour récupérer les formations depuis la bdd
+   */
   getAllTrainings() {
     this.apiService.getTrainings().subscribe({
       next : (data) => this.listTrainings = data,
-      error : (err) => this.error = err.message,
-      complete : () => this.error = null
+      error : (error) => {
+        console.error("Une erreur s'est produite lors de la récupération des formations :", error);
+        this.errorService.setError("Une erreur s'est produite lors de la récupération des données.");
+      }
     })
   }
 
@@ -37,4 +43,12 @@ export class TrainingsComponent implements OnInit {
     this.cartService.addTraining(training);
     this.router.navigateByUrl('cart');
   }
+
+    /**
+    * Récupère le message d'erreur via errorService
+    * @returns String | null
+    */
+    displayErrorMsg() : String | null {
+      return this.errorService.getError();
+    };
 }

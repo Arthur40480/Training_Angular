@@ -1,6 +1,6 @@
 <div class="container">
-    <ng-container *ngIf="listTrainings else loading">
-        <table class="table table-striped table-hover">
+    <ng-container *ngIf="listTrainings || this.displayErrorMsg() else loading">
+        <table class="table table-striped table-hover" *ngIf="listTrainings">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -21,6 +21,9 @@
                 </tr>
             </tbody>
         </table>
+        <div *ngIf="this.displayErrorMsg()">
+            <p class="dt text-danger">{{this.displayErrorMsg()}}</p>
+        </div>
     </ng-container>
     <ng-template #loading>
         <div>loading...</div>

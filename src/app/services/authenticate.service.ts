@@ -69,7 +69,7 @@ export class AuthenticateService {
   }
 
   /**
-   * Supprime l'utilisateur du localStorage
+   * Supprime l'utilisateur connecté du localStorage
    */
   removeUserFromLocalStorage() {
     localStorage.removeItem('user');
