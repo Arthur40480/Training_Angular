@@ -13,14 +13,25 @@ export class AppComponent {
 
   constructor(private authService : AuthenticateService) {}
 
+  /**
+   * Méthode pour vérifier si l'utilisateur est un admin
+   * @returns boolean
+   */
   verifyIsAdmin() : boolean {
     return this.authService.isAdmin();
   }
 
+  /**
+   * Méthode qui permet de vérifier si un utilisateur est connecté
+   * @returns User | null
+   */
   verifyIfUserConnected() : User | null {
     return this.authService.connectedUser;
   }
 
+  /**
+   * Méthode de déconnexion
+   */
   logout() {
     this.authService.removeUserFromLocalStorage();
   }

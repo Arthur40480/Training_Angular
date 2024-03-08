@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   /**
    * Fonction qui permet à l'utilisateur de se connecter
    */
-  login() {
+  login() : void {
     if(this.authService.ifUserExist(new User(this.myForm.value.email, this.myForm.value.password))) {
       this.isLoginFailed = false;
       this.router.navigateByUrl('trainings');

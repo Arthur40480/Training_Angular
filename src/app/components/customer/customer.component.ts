@@ -16,8 +16,8 @@ export class CustomerComponent implements OnInit {
     let customer = this.cartService.getCustomerFromLocalStorage();
     this.myForm = new FormGroup({
       name : new FormControl(customer.name),
-      firstName: new FormControl(customer.firstName),
-      address : new FormControl(customer.address),
+      firstName: new FormControl(customer.lastname),
+      address : new FormControl(customer.adress),
       phone : new FormControl(customer.phone),
       email : new FormControl(customer.email)
     })

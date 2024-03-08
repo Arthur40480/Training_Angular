@@ -12,7 +12,7 @@ export class ErrorServiceService {
    * Récupère le message d'erreur
    * @param message 
    */
-  setError(message : String) {
+  setError(message : String) : void {
     this.errorMsg = message;
   }
 
@@ -27,7 +27,7 @@ export class ErrorServiceService {
   /**
    * Supprime le message d'erreur
    */
-  clearError() {
+  clearError() : void {
     this.errorMsg = null;
   }
 }

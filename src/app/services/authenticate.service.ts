@@ -19,7 +19,7 @@ export class AuthenticateService {
   /**
    * Récupération des Users dans la bdd
    */
-  getAllUsers() {
+  getAllUsers() : void {
     this.apiService.getUsers().subscribe({
       next : (data) => this.listUser = data,
       error : (err) => this.error = err.message,
@@ -45,7 +45,7 @@ export class AuthenticateService {
   /**
   * Enregistre l'utilisateur dans le LocalStorage tout en cryptant ces données
   */
-  saveUserInLocalStorage(user : User) {
+  saveUserInLocalStorage(user : User) : void {
     const userCopy = { ...user};
     userCopy.password = this.encryptService.encrypt(user.password);
     userCopy.email = this.encryptService.encrypt(user.email);
@@ -71,7 +71,7 @@ export class AuthenticateService {
   /**
    * Supprime l'utilisateur connecté du localStorage
    */
-  removeUserFromLocalStorage() {
+  removeUserFromLocalStorage() : void {
     localStorage.removeItem('user');
     this.connectedUser == null;
   }

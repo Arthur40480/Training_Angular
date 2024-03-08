@@ -24,7 +24,7 @@ export class CartService {
   /**
    * Enregistre le client dans le LocalStorage
    */
-  saveCustomerInLocalStorage(customer : Customer) {
+  saveCustomerInLocalStorage(customer : Customer) : void {
     localStorage.setItem('customer', JSON.stringify(customer));
   }
 
@@ -32,7 +32,7 @@ export class CartService {
    * Renvoi le client à partir du LocalStorage si il existe, sinon renvoi une instance de la classe Customer
    * @returns customer
    */
-  getCustomerFromLocalStorage() {
+  getCustomerFromLocalStorage() : Customer {
     let customer = localStorage.getItem("customer");
     if(customer) {
       return JSON.parse(customer);
@@ -45,7 +45,7 @@ export class CartService {
    * Ajout d'une formation au panier
    * @param training Formation ajoutée
    */
-  addTraining(training: Training) {
+  addTraining(training: Training) : void {
     const existingArticleInCart = this.cart?.find(article => article.id == training.id);
     if(existingArticleInCart) {
       existingArticleInCart.quantity += training.quantity;
@@ -62,7 +62,7 @@ export class CartService {
    * Suppression d'une formation dans le panier
    * @param training Formation supprimée
    */
-  removeTraining(training: Training) {
+  removeTraining(training: Training) : void {
     const indexArticleToDelete = this.cart?.indexOf(training);
     if(indexArticleToDelete !== -1) {
       this.cart?.splice(indexArticleToDelete, 1);
@@ -74,7 +74,7 @@ export class CartService {
   /**
    * Calcule le coût total du panier
    */
-  getTotalPrice() {
+  getTotalPrice() : void {
     this.totalPrice = 0;
     if(this.cart.length > 0) {
       for(let article of this.cart) {
@@ -88,7 +88,7 @@ export class CartService {
   /**
    * Vide le panier
    */
-  clearCart() {
+  clearCart() : void {
     this.cart = [];
     this.clearLocalStorage();
     this.getTotalPrice();
@@ -97,7 +97,7 @@ export class CartService {
   /**
    * Vide le localStorage
    */
-  clearLocalStorage() {
+  clearLocalStorage() : void {
     localStorage.removeItem('cart');
     localStorage.removeItem('customer');
   }

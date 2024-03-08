@@ -25,7 +25,7 @@ export class TrainingsComponent implements OnInit {
   /**
    * Fonction pour récupérer les formations depuis la bdd
    */
-  getAllTrainings() {
+  getAllTrainings() : void {
     this.apiService.getTrainings().subscribe({
       next : (data) => this.listTrainings = data,
       error : (error) => {
@@ -39,7 +39,7 @@ export class TrainingsComponent implements OnInit {
    * Ajout d'une formation au panier via la function addTraining() du cartService
    * @param training Formation ajoutée
    */
-  onAddToCart(training:Training) {
+  onAddToCart(training:Training) : void {
     this.cartService.addTraining(training);
     this.router.navigateByUrl('cart');
   }
