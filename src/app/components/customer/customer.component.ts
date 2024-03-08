@@ -2,7 +2,7 @@ import { Component, OnInit, SimpleChange } from '@angular/core';
 import { Customer } from 'src/app/model/customer.model';
 import { CartService } from 'src/app/services/cart.service';
 import { Router } from '@angular/router';
-import { FormControl, FormGroup} from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-customer',
@@ -12,14 +12,14 @@ import { FormControl, FormGroup} from '@angular/forms';
 export class CustomerComponent implements OnInit {
   myForm : FormGroup;
 
-  constructor(public cartService : CartService, private router : Router) {
+  constructor(public cartService : CartService, private router : Router, private formBuilder : FormBuilder) {
     let customer = this.cartService.getCustomerFromLocalStorage();
-    this.myForm = new FormGroup({
-      name : new FormControl(customer.name),
-      firstName: new FormControl(customer.lastname),
-      address : new FormControl(customer.adress),
-      phone : new FormControl(customer.phone),
-      email : new FormControl(customer.email)
+    this.myForm = this.formBuilder.group({
+      name: ['', [Validators.required, Validators.pattern('^[A-Za-z]+$')]],
+      lastname: ['', [Validators.required, Validators.pattern('^[A-Za-z]+$')]],
+      adress: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+      email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')]]
     })
   }
 

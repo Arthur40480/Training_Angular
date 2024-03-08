@@ -49,12 +49,6 @@ export class ApiService {
   }
 
   public deleteTraining(id : number) {
-    this.http.delete(environment.host + "/trainings/" + id).subscribe({
-      next: response => console.log("Formation supprimée avec succès: ", response),
-      error: error => {
-        console.error("Une erreur s'est produite lors de la suppression de la formation :", error);
-        this.errorService.setError("Une erreur s'est produite lors de la suppression de la formation.");
-      }
-    })
+    return this.http.delete(environment.host + "/trainings/" + id)
   }
 }

@@ -3,24 +3,24 @@
         <form [formGroup]="myForm" (ngSubmit)="onSaveCustomer(myForm)">
         <div class="form-group">
             <label class="control-label">Nom : </label>
-            <input type="text" name="name" required class="form-control" [(ngModel)]="cartService.newCustomer.name">
+            <input type="text" formControlName="name" required class="form-control" [(ngModel)]="cartService.newCustomer.name">
         </div>
         <div class="form-group">
             <label class="control-label">Prénom : </label>
-            <input type="text" name="firstName" required class="form-control" [(ngModel)]="cartService.newCustomer.lastname">
+            <input type="text" formControlName="lastname" required class="form-control" [(ngModel)]="cartService.newCustomer.lastname">
         </div>
         <div class="form-group">
             <label class="control-label">Adress : </label>
-            <input type="text" name="address" required class="form-control" [(ngModel)]="cartService.newCustomer.adress">
+            <input type="text" formControlName="adress" required class="form-control" [(ngModel)]="cartService.newCustomer.adress">
 
             <div class="form-group">
                 <label class="control-label">Tel : </label>
-                <input type="text" name="phone" required class="form-control" [(ngModel)]="cartService.newCustomer.phone">
+                <input type="text" formControlName="phone" required class="form-control" [(ngModel)]="cartService.newCustomer.phone">
             </div>
 
             <div class="form-group">
                 <label class="control-label">Email : </label>
-                <input type="text" name="email" required class="form-control" [(ngModel)]="cartService.newCustomer.email">
+                <input type="text" formControlName="email" required class="form-control" [(ngModel)]="cartService.newCustomer.email">
             </div>
 
             <button type="submit" class="btn btn-primary" [disabled]="!myForm.valid">Next</button>

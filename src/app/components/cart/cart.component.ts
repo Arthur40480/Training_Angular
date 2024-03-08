@@ -21,7 +21,7 @@ export class CartComponent implements OnInit {
    * Suppression d'une formation du panier via la function removeTraining() du cartService
    * @param training Formation supprimée
    */
-  removeToCart(training : Training) {
+  removeToCart(training : Training) : void {
     this.cartService.removeTraining(training);
   }
 

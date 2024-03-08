@@ -27,20 +27,6 @@
       "description": "Initiation au Dev/Web avec php 4 jours",
       "price": 1300,
       "quantity": 1
-    },
-    {
-      "name": "Java",
-      "description": "5 jours",
-      "price": "2345",
-      "quantity": 1,
-      "id": 5
-    },
-    {
-      "name": "Faire du riz",
-      "description": "top",
-      "price": "12",
-      "quantity": 1,
-      "id": 6
     }
   ],
   "users": [

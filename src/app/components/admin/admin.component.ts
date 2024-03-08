@@ -37,7 +37,16 @@ export class AdminComponent implements OnInit {
    */
     deleteTraining(training: Training) {
       if(training.id !== undefined) {
-        this.apiService.deleteTraining(training.id);
+        this.apiService.deleteTraining(training.id).subscribe({
+          next: response => {
+            console.log("Formation supprimée avec succès: ", response),
+            this.getAllTrainings();
+          },
+          error: error => {
+            console.error("Une erreur s'est produite lors de la suppression de la formation :", error);
+            this.errorService.setError("Une erreur s'est produite lors de la suppression de la formation.");
+          }
+        });
       }
     };
 
