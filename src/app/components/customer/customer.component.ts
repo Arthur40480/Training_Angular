@@ -13,7 +13,6 @@ export class CustomerComponent implements OnInit {
   myForm : FormGroup;
 
   constructor(public cartService : CartService, private router : Router, private formBuilder : FormBuilder) {
-    let customer = this.cartService.getCustomerFromLocalStorage();
     this.myForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.pattern('^[A-Za-z]+$')]],
       lastname: ['', [Validators.required, Validators.pattern('^[A-Za-z]+$')]],
