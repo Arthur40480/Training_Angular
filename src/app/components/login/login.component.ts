@@ -15,7 +15,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private formBuilder : FormBuilder, private authService : AuthenticateService, private router : Router) {
     this.myForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')]],
+      // username: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')]],
+      username: ['', Validators.required],
       password: ['', Validators.required]
     })
   }
@@ -27,7 +28,7 @@ export class LoginComponent implements OnInit {
    * Fonction qui permet à l'utilisateur de se connecter
    */
   login() : void {
-    if(this.authService.ifUserExist(new User(this.myForm.value.email, this.myForm.value.password))) {
+    if(this.authService.ifUserExist(new User(this.myForm.value.username, this.myForm.value.password))) {
       this.isLoginFailed = false;
       this.router.navigateByUrl('trainings');
     }else {

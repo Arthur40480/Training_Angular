@@ -1,3 +1,5 @@
+import { Category } from "./category.model";
+
 export class Training {
     id? : number;
     name : string;

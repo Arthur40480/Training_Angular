@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../model/user.model';
 import { ApiService } from './api.service';
 import { EncryptDecryptService } from './encrypt-decrypt.service';
+import { UserRole } from '../model/userRole.model';
 
 @Injectable({
   providedIn: 'root'
@@ -32,10 +33,12 @@ export class AuthenticateService {
    * @param userToCheck : User
    */
   ifUserExist(userToCheck: User) : boolean {
-    const existingUser = this.listUser.find(user => user.password === userToCheck.password && user.email === userToCheck.email)
+    console.log(this.listUser[0].userRoles)
+    const existingUser = this.listUser.find(user => user.password === userToCheck.password && user.username === userToCheck.username)
     if(existingUser) {
       this.saveUserInLocalStorage(existingUser);
       this.connectedUser = this.getUserfromLocalStorage()
+      console.log("User connecter:", this.connectedUser)
       return true;
     }else {
       return false;
@@ -48,7 +51,7 @@ export class AuthenticateService {
   saveUserInLocalStorage(user : User) : void {
     const userCopy = { ...user};
     userCopy.password = this.encryptService.encrypt(user.password);
-    userCopy.email = this.encryptService.encrypt(user.email);
+    userCopy.username = this.encryptService.encrypt(user.username);
     localStorage.setItem('user', JSON.stringify(userCopy));
   }
     
@@ -60,7 +63,7 @@ export class AuthenticateService {
     if(encryptUserData) {
       const user = JSON.parse(encryptUserData);
       user.password = this.encryptService.decrypt(user.password);
-      user.email = this.encryptService.decrypt(user.email);
+      user.username = this.encryptService.decrypt(user.username);
       return user;
 
     }else {
@@ -83,10 +86,12 @@ export class AuthenticateService {
   isAdmin() : boolean {
     this.connectedUser = this.getUserfromLocalStorage();
     if(this.connectedUser) {
-      const isAdmin= this.connectedUser.roles.includes("ADMIN");
+      const isAdmin= this.connectedUser.userRoles.some(userRole => userRole.role.name == "ADMIN");
       if(isAdmin) {
+        console.log("C'est un admin", this.connectedUser)
         return true;
       }else{
+        console.log("Ce n'est pas un admin", this.connectedUser)
         return false;
       }
     }

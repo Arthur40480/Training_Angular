@@ -4,6 +4,7 @@ import { Training } from '../model/training.model';
 import { User } from '../model/user.model';
 import { environment } from 'src/environments/environment';
 import { ErrorServiceService } from './error-service.service';
+import { Category } from '../model/category.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,13 +12,21 @@ import { ErrorServiceService } from './error-service.service';
 export class ApiService {
   
   constructor(private http: HttpClient, private errorService: ErrorServiceService) { }
-
+  
   public getTrainings() {
     return this.http.get<Training[]>(environment.host + "/trainings");
   }
 
-  getTraining(id : number) {
+  public getTraining(id : number) {
     return this.http.get<Training>(environment.host + "/trainings/" + id);
+  }
+
+  public getTrainingByCategory(id : number) {
+    return this.http.get<Training[]>(environment.host + "/trainings/category/" + id);
+  }
+
+  public getCategories() {
+    return this.http.get<Category[]>(environment.host + "/category")
   }
 
   public getUsers() {

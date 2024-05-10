@@ -1,14 +1,16 @@
+import { UserRole } from "./userRole.model";
+
 export class User {
     static idCounter = 1;
     id : number;
-    email : string;
+    username : string;
     password : string;
-    roles : string[];
+    userRoles : UserRole[]; 
 
-    constructor(email:string, password:string) {
+    constructor(username:string, password:string) {
         this.id = User.idCounter++;
-        this.email = email;
+        this.username = username;
         this.password = password;
-        this.roles = ["USER"];
+        this.userRoles = [];
     }
 }

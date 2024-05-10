@@ -2,15 +2,15 @@
     <div class="col-md-3">
         <form [formGroup]="myForm" (ngSubmit)="login()">
         <div class="form-group">
-            <label class="control-label">Email : </label>
-            <input type="text" formControlName="email" required class="form-control">
+            <label class="control-label">Username : </label>
+            <input type="text" formControlName="username" required class="form-control">
         </div>
         <div class="form-group">
             <label class="control-label">Password :</label>
             <input type="password" formControlName="password" required class="form-control">
         </div>
         <div>
-            <p *ngIf="isLoginFailed" class="text-danger">Email or password incorrect.</p>
+            <p *ngIf="isLoginFailed" class="text-danger">Username or password incorrect.</p>
         </div>
             <button type="submit" class="btn btn-primary mt-2 " [disabled]="!myForm.valid">Connexion</button>
         </form>

@@ -4,6 +4,7 @@ import { CartService } from 'src/app/services/cart.service';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { ErrorServiceService } from 'src/app/services/error-service.service';
+import { Category } from 'src/app/model/category.model';
 
 
 @Component({
@@ -13,6 +14,7 @@ import { ErrorServiceService } from 'src/app/services/error-service.service';
 })
 export class TrainingsComponent implements OnInit {
   listTrainings : Training[] | undefined;
+  listCategories : Category[] | undefined;
   error : string | undefined | null;
   
   constructor(private cartService : CartService, private router : Router, private apiService : ApiService, private errorService : ErrorServiceService) { 
@@ -20,6 +22,7 @@ export class TrainingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllTrainings();
+    this.getAllCategories();
   }
   
   /**
@@ -35,6 +38,26 @@ export class TrainingsComponent implements OnInit {
     })
   }
 
+  getTrainingByCategory(idCategory:number) : void {
+    this.apiService.getTrainingByCategory(idCategory).subscribe({
+      next : (data) => this.listTrainings = data,
+      error : (error) => {
+        console.error("Une erreur s'est produite lors de la récupération des formations :", error);
+        this.errorService.setError("Une erreur s'est produite lors de la récupération des données.");
+      }
+    })
+  }
+
+  getAllCategories() : void {
+    this.apiService.getCategories().subscribe({
+      next : (data) => this.listCategories = data,
+      error : (error) => {
+        console.error("Une erreur s'est produite lors de la récupération des catégories :", error);
+        this.errorService.setError("Une erreur s'est produite lors de la récupération des données.");
+      }
+    })
+  }
+  
     /**
    * Ajout d'une formation au panier via la function addTraining() du cartService
    * @param training Formation ajoutée
