@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Training } from '../model/training.model';
 import { Customer } from '../model/customer.model';
+import { Order } from '../model/order.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class CartService {
 
   constructor() {
     this.totalPrice = 0;
-    this.newCustomer = new Customer('', '', '', '', '');
+    this.newCustomer = new Customer('', '', '', '', '',);
     let cart = localStorage.getItem("cart");
     if(cart) {
       this.cart = JSON.parse(cart);

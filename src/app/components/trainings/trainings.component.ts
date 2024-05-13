@@ -64,7 +64,6 @@ export class TrainingsComponent implements OnInit {
    */
   onAddToCart(training:Training) : void {
     this.cartService.addTraining(training);
-    this.router.navigateByUrl('cart');
   }
 
     /**

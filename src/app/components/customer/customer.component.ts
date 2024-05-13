@@ -2,7 +2,8 @@ import { Component, OnInit, SimpleChange } from '@angular/core';
 import { Customer } from 'src/app/model/customer.model';
 import { CartService } from 'src/app/services/cart.service';
 import { Router } from '@angular/router';
-import { FormControl, FormGroup, FormBuilder, Validators} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators} from '@angular/forms';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-customer',
@@ -12,7 +13,7 @@ import { FormControl, FormGroup, FormBuilder, Validators} from '@angular/forms';
 export class CustomerComponent implements OnInit {
   myForm : FormGroup;
 
-  constructor(public cartService : CartService, private router : Router, private formBuilder : FormBuilder) {
+  constructor(public cartService : CartService, private apiService : ApiService, private router : Router, private formBuilder : FormBuilder) {
     this.myForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.pattern('^[A-Za-z]+$')]],
       lastname: ['', [Validators.required, Validators.pattern('^[A-Za-z]+$')]],
@@ -30,7 +31,8 @@ export class CustomerComponent implements OnInit {
    * @param customer client à enregistrer dans le localstorage
    */
   onSaveCustomer(form : FormGroup) {
-    this.cartService.saveCustomerInLocalStorage(new Customer(form.value.name, form.value.firstName, form.value.address, form.value.phone, form.value.email));
+    this.cartService.saveCustomerInLocalStorage(new Customer(form.value.name, form.value.lastname, form.value.adress, form.value.phone, form.value.email));
     this.router.navigateByUrl('order');
+    this.apiService.saveCustomer(new Customer(form.value.name, form.value.lastname, form.value.adress, form.value.phone, form.value.email));
   }
 }
